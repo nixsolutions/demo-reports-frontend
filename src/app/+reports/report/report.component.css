@@ -1,0 +1,9 @@
+.form-control.datepicker, .form-control.timepicker {
+  width: 80%;
+  float: left;
+  margin-right: 2px;
+}
+.form-control.timepicker {
+  width: 70%;
+  margin-right: 7px;
+}

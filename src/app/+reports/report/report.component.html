@@ -1,0 +1,58 @@
+<td>
+  <span *ngIf="!isEditDate">
+    <span>{{report.date | date}}</span>
+    <button type="button" class="close" aria-label="Close" (click)="onEditDate()"><span aria-hidden="true" class="glyphicon glyphicon-pencil"></span></button>
+  </span>
+  <p *ngIf="isEditDate">
+    <input type="date"
+          class="form-control datepicker"
+          placeholder="Date"
+          value="{{report.date}}"
+          name="date"
+          required
+          [(ngModel)]="report.date"/>
+    <button type="button" class="btn btn-default" (click)="changeDate()">
+      <span class="glyphicon glyphicon-ok"></span>
+    </button>
+  </p>
+</td>
+<td>
+  <span *ngIf="!isEditTimeTaken">
+    <span>{{report.timeTaken}}</span>
+    <button type="button" class="close" aria-label="Close" (click)="onEditTimeTaken()"><span aria-hidden="true" class="glyphicon glyphicon-pencil"></span></button>
+  </span>
+  <p *ngIf="isEditTimeTaken">
+    <input type="text"
+          class="form-control timepicker"
+          placeholder="Total time"
+          name="timeTaken"
+          #timeTaken
+          required
+          [(ngModel)]="report.timeTaken"
+          (keydown.enter)="changeTimeTaken(timeTaken.value)"
+          (blur)="changeTimeTaken(timeTaken.value)"
+          (focus)="isIncorrectFormat = false"/>
+    <span *ngIf="!isIncorrectFormat">(eg. 2h 30m)</span>
+    <span *ngIf="isIncorrectFormat">Incorrect Format</span>
+  </p>
+</td>
+<td>
+  <span *ngIf="!isEditDescription">
+    <span>{{report.description}}</span>
+    <button type="button" class="close" aria-label="Close" (click)="onEditDescription()"><span aria-hidden="true" class="glyphicon glyphicon-pencil"></span></button>
+  </span>
+  <input type="text"
+         class="form-control"
+         placeholder="Description"
+         value="{{report.description}}"
+         name="description"
+         #description
+         required
+         *ngIf="isEditDescription"
+         [(ngModel)]="report.description"
+         (keydown.enter)="changeDescription(description.value)"
+         (blur)="changeDescription(description.value)"/>
+</td>
+<td>
+  <button class="btn btn-default" (click)="onRemove(report.id)">Delete report</button>
+</td>

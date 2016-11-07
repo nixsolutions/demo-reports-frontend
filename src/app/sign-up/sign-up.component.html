@@ -1,0 +1,41 @@
+<div class="container">
+  <form class="form-signin" (submit)="onSubmit()">
+    <h2 class="form-signin-heading">Please sign up</h2>
+    <label for="firstName" class="sr-only">First name</label>
+    <input type="text"
+           id="firstName"
+           class="form-control"
+           placeholder="First name"
+           required
+           autofocus
+           name="firstName"
+           [(ngModel)]="newUser.firstName">
+    <label for="lastName" class="sr-only">Last name</label>
+    <input type="text"
+           id="lastName"
+           class="form-control"
+           placeholder="Last name"
+           required
+           name="lastName"
+           [(ngModel)]="newUser.lastName">
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email"
+           id="inputEmail"
+           class="form-control"
+           placeholder="Email address"
+           required
+           name="email"
+           [(ngModel)]="newUser.email">
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password"
+           id="inputPassword"
+           class="form-control"
+           placeholder="Password minimum 6 characters"
+           required
+           name="password"
+           [(ngModel)]="newUser.password">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+    <p class="text-center">or</p>
+    <a class="btn btn-lg btn-primary btn-block" routerLink="/signin">Sign In</a>
+  </form>
+</div>
