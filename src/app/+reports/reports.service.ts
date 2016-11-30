@@ -1,48 +1,53 @@
-import { Injectable }  from '@angular/core';
+import { Injectable }     from '@angular/core';
 import { Http,
          Response,
          Headers,
          RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs';
-import { AuthService } from '../services';
+import { AuthService }    from '../services';
+import { Router }         from '@angular/router';
 
 @Injectable()
 export class ReportsService  {
-  private token: any = window.localStorage.getItem('NJTPUserToken');
   public reports: Array<any> = [];
 
   constructor( private _http: Http,
-               private _authService: AuthService ) {}
+               private _authService: AuthService,
+               private _router: Router ) {}
 
   getReports() {
-    let headers = new Headers({ 'Authorization': this.token });
+    let token = window.localStorage.getItem('NJTPUserToken');
+    let headers = new Headers({ 'Authorization': token });
     let options = new RequestOptions({ headers: headers });
     return this._http.get(`${this._authService.URL}/reports`, options)
                      .map(this.extractData)
-                     .catch(this.handleError);
+                     .catch(this.handleError.bind(this));
   }
 
   removeReport(id) {
-    let headers = new Headers({ 'Authorization': this.token });
+    let token = window.localStorage.getItem('NJTPUserToken');
+    let headers = new Headers({ 'Authorization': token });
     let options = new RequestOptions({ headers: headers });
     return this._http.delete(`${this._authService.URL}/reports/${id}`, options)
-                     .catch(this.handleError);
+                     .catch(this.handleError.bind(this));
   }
 
   addReport(obj) {
-    let headers = new Headers({ 'Authorization': this.token });
+    let token = window.localStorage.getItem('NJTPUserToken');
+    let headers = new Headers({ 'Authorization': token });
     let options = new RequestOptions({ headers: headers });
     return this._http.post(`${this._authService.URL}/reports`, obj, options)
                      .map(this.extractData)
-                     .catch(this.handleError);
+                     .catch(this.handleError.bind(this));
   }
 
   updateReport(obj) {
-    let headers = new Headers({ 'Authorization': this.token });
+    let token = window.localStorage.getItem('NJTPUserToken');
+    let headers = new Headers({ 'Authorization': token });
     let options = new RequestOptions({ headers: headers });
     return this._http.put(`${this._authService.URL}/reports/${obj.id}`, { date: obj.date, timeTaken: obj.timeTaken,                            description: obj.description }, options)
                      .map(this.extractData)
-                     .catch(this.handleError);
+                     .catch(this.handleError.bind(this));
   }
 
   private extractData(res: Response) {
@@ -51,6 +56,11 @@ export class ReportsService  {
   }
 
   private handleError (error: any) {
+    let err = error.json();
+    if (err.name === 'UnauthorizedError') {
+      window.localStorage.removeItem('NJTPUserToken');
+      this._router.navigate(['signin']);
+    };
     let errMsg = (error.message) ? error.message :
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     return Observable.throw(errMsg);
