@@ -45,7 +45,7 @@ export class ReportComponent implements OnInit {
 
   changeDescription(value) {
     if (!value) return;
-    this.updateReport();
+    this.updateReport('description');
     this.isEditDescription = false;
   }
 
@@ -68,20 +68,23 @@ export class ReportComponent implements OnInit {
     }
     this.report.timeTaken = value;
     this.currentTimeTaken = value;
-    this.updateReport();
-    this.decorateTimeTaken();
+    this.updateReport('timeTaken');
     this.isIncorrectFormat = true;
     this.isEditTimeTaken = false;
   }
 
   changeDate() {
-    this.updateReport();
+    this.updateReport('date');
     this.isEditDate = false;
   }
 
-  updateReport() {
-    this._reportsService.updateReport(this.report)
-      .subscribe( report => {})
+  updateReport(value) {
+    let report = this.report;
+    if (value === 'description' || value === 'date') {
+      report.timeTaken = this.currentTimeTaken;
+    }
+    this._reportsService.updateReport(report)
+      .subscribe( report => { this.decorateTimeTaken() })
   }
 
   onRemove(id) {
