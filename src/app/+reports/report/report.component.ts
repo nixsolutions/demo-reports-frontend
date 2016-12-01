@@ -1,4 +1,3 @@
-import { ReportsModule } from './../reports.module';
 import { Component, OnInit, Input } from '@angular/core';
 import { ReportsService }           from '../reports.service';
 
