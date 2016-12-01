@@ -9,7 +9,7 @@ import { Router }         from '@angular/router';
 
 @Injectable()
 export class ReportsService  {
-  public reports: Array<any> = [];
+  public reports: any = [];
 
   constructor( private _http: Http,
                private _authService: AuthService,

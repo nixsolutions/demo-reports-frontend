@@ -10,7 +10,7 @@ import { ReportsService }    from './reports.service';
 export class ReportsComponent implements OnInit {
   public upToDate: boolean = false;
   public upToTime: boolean = false;
-  public reports: Array<any> = [];
+  public reports: any = [];
   private stream: any;
   constructor( private _reportsService: ReportsService,
                private _router: Router ) { }

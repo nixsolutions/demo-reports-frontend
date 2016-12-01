@@ -27,10 +27,10 @@ export class ReportComponent implements OnInit {
   }
 
   decorateTimeTaken() {
-    let seconds = parseInt((this.currentTimeTaken/1000)%60);
-    let minutes = parseInt((this.currentTimeTaken/(1000*60))%60);
+    let seconds: any = Math.floor((this.currentTimeTaken/1000)%60);
+    let minutes: any = Math.floor((this.currentTimeTaken/(1000*60))%60);
+    let hours: any = Math.floor((this.currentTimeTaken/(1000*60*60))%24);
     if (minutes < 10) minutes = `0${minutes}`;
-    let hours = parseInt((this.currentTimeTaken/(1000*60*60))%24);
     if (hours < 10) hours = `0${hours}`;
     this.report.timeTaken = `${hours}.${minutes}`;
   }
