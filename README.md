@@ -3,7 +3,8 @@ Angular 2.0 Demo Application - Simple reports manager
 
 "Angular 2.0 Demo Application - Simple reports manager". [Demo](https://nixsolutions.github.io/demo-reports-frontend/).
 
-The "Angular 2.0 Demo Application" is a reference application created to show how to develop Angular SPA applications following the recommended best practices.
+Angular 2.0 Demo Application is a reference application created to show how to develop Angular SPA applications following the recommended best practices. The application is intended to show the basic operations: create, delete, edit, update. The current application is a project front end part,  the back end part can be found [here](https://github.com/nixsolutions/demo-reports-backend)
+
 
 User for Demo:
 * email: tester5@mail.com
